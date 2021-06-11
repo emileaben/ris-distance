@@ -121,7 +121,7 @@ for pfx,asn in candidates.keys():
 
 for af in (4,6):
     for asn in sorted( asn_score[ af ].keys(), key=lambda x: asn_score[af][x] ):
-        print( "%s %s %s" % ( af, asn, asn_score[af][ asn ] ) )
+        print( "GLOBAL %s %s %s" % ( af, asn, asn_score[af][ asn ] ) )
 
   
 
