@@ -18,12 +18,11 @@ for line in sys.stdin:
     if pfx == '::/0':
         continue
     asns = fields[6].split(' ')
+    orig_len = len( set( asns ) )
     # remove duplicates
     asns_nodup = [i[0] for i in groupby(asns)]
     has_dups = 0
     has_poison = 0
-    if len( asns ) > len( asns_nodup ):
-      has_dups = 1
     # remove path poisoning
     if asns_nodup.count( asns_nodup[ -1 ] ) > 1:
          start_i = None
@@ -43,5 +42,6 @@ for line in sys.stdin:
             has_poison = 1
          asns_nodup = healthy_path # put it back into the asns_nodup
     nodup_len = len( asns_nodup )
-    orig_len = len( set( asns ) )
+    if orig_len > nodup_len:
+      has_dups = 1
     print "%s %s %s %s %s %s" % ( peer, pfx, nodup_len, orig_len, has_dups, has_poison )

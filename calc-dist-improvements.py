@@ -109,6 +109,7 @@ for line in sys.stdin:
 
 
 asn_score = {4:{}, 6:{}}
+asn_pfx_set = {4: {}, 6:{}} # this holds the prefixes that peering with this ASN will improve distance for
 for pfx,asn in candidates.keys():
    af = 4
    if ':' in pfx:
@@ -119,9 +120,12 @@ for pfx,asn in candidates.keys():
    asn_score[ af ].setdefault( asn, 0 )
    asn_score[ af ][ asn ] += improve
 
+   asn_pfx_set[ af ].setdefault( asn, set() )
+   asn_pfx_set[ af ][ asn ].add( pfx )
+
 for af in (4,6):
     for asn in sorted( asn_score[ af ].keys(), key=lambda x: asn_score[af][x] ):
-        print( "GLOBAL %s %s %s" % ( af, asn, asn_score[af][ asn ] ) )
+        print( "GLOBAL %s %s %s %s" % ( af, asn, asn_score[af][ asn ], "|".join( list( asn_pfx_set[ af ][ asn ] ) ) ) )
 
   
 

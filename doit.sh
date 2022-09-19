@@ -1,8 +1,11 @@
-YYYY=2021
-MM=01
-DD=01
+YYYY=2022
+MM=09
+DD=15
 
-THRES=28 # max number of peers per ASN
+# minimum number of RIS peers that see a prefix (before the prefix is considered 'significant'
+THRES=28 
+
+mkdir -p ./data
 
 echo "creating peer.pfx.pathlen.$YYYY.$MM.$DD.txt.gz"
 if [ ! -f peer.pfx.pathlen.$YYYY.$MM.$DD.txt.gz ]; then
