@@ -1,6 +1,6 @@
-YYYY=2022
-MM=09
-DD=15
+YYYY=2024
+MM=07
+DD=01
 
 # minimum number of RIS peers that see a prefix (before the prefix is considered 'significant'
 THRES=28 
